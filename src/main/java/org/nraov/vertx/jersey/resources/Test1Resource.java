@@ -10,6 +10,8 @@ import javax.ws.rs.container.AsyncResponse;
 import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 @Path("/test1")
 @Produces(MediaType.APPLICATION_JSON)
@@ -22,12 +24,22 @@ public class Test1Resource {
 	}
 	@GET
 	@Path("json")
-	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public MyObject getJson() {
 		MyObject o = new MyObject();
 		o.setName("Andy");
 		return o;
 	}
+
+	@GET
+	@Path("xml")
+	@Produces(MediaType.APPLICATION_XML)
+	public MyObject xml() {
+		MyObject o = new MyObject();
+		o.setName("Andy");
+		return o;
+	}
+
 	@GET
 	@Path("async")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -38,6 +50,7 @@ public class Test1Resource {
 			asyncResponse.resume(o);
 		});
 	}
+	@XmlRootElement
 	public static class MyObject {
 
 		private String name;

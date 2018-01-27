@@ -30,6 +30,6 @@ public class Runner {
         DeploymentOptions options = new DeploymentOptions();
         // options.setIsolationGroup("A");
         options.setConfig(jerseyConfig);
-        vertx.deployVerticle("java-guice:" + JerseyVerticle.class.getCanonicalName(), options);
+        vertx.deployVerticle("java-hk2:" + JerseyVerticle.class.getCanonicalName(), options);
 	}
 }
