@@ -1,8 +1,14 @@
 package org.nraov.vertx.jersey.resources;
 
+import io.vertx.core.Vertx;
+
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.container.AsyncResponse;
+import javax.ws.rs.container.Suspended;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 @Path("/test1")
@@ -13,5 +19,35 @@ public class Test1Resource {
 	@Path("id")
 	public String getId() {
 		return "Id from Test1Resource";
+	}
+	@GET
+	@Path("json")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public MyObject getJson() {
+		MyObject o = new MyObject();
+		o.setName("Andy");
+		return o;
+	}
+	@GET
+	@Path("async")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void getJsonAsync(@Suspended final AsyncResponse asyncResponse, @Context Vertx vertx) {
+		vertx.runOnContext(aVoid -> {
+			MyObject o = new MyObject();
+			o.setName("Andy");
+			asyncResponse.resume(o);
+		});
+	}
+	public static class MyObject {
+
+		private String name;
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
 	}
 }

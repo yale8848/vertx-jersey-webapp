@@ -8,6 +8,7 @@
     "host": "localhost",
     "port": 8080,
     "base_path": "/",
+      "features": ["org.glassfish.jersey.jackson.JacksonFeature"],
     "resources": ["org.nraov.vertx.jersey.resources"]
     }
 }
