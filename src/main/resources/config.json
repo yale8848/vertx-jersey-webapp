@@ -1,14 +1,16 @@
 {
-    "hk2_binder": [
-    "com.englishtown.vertx.hk2.WhenHK2JerseyBinder",
-    "com.englishtown.vertx.promises.hk2.HK2WhenBinder"
-    ],
+
 
     "jersey": {
+        "hk2_binder": [
+            "com.englishtown.vertx.hk2.WhenHK2JerseyBinder",
+            "com.englishtown.vertx.promises.hk2.HK2WhenBinder",
+            "org.nraov.vertx.jersey.binder.FilterBinder"
+        ],
     "host": "localhost",
     "port": 8080,
     "base_path": "/",
-
+        "features":["org.glassfish.jersey.server.mvc.freemarker.FreemarkerMvcFeature"],
     "resources": ["org.nraov.vertx.jersey.resources"]
     }
 }
